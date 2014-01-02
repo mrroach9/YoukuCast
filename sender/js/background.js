@@ -6,11 +6,14 @@
 // Date Created: 01/01/2014
 
 function onRequest(request, sender, sendResponse) {
+    console.log('Video ID: ', request['video-id']);
+    console.log('Tab ID: ', sender.tab.id);
+    console.log('Tab Title: ', sender.tab.title);
     chrome.pageAction.show(sender.tab.id);
-    sendReponse({});
+    sendResponse({});
     // TODO: save sender info and video player info into global map.
 }
 
-console.log("[Youku Cast] Background script loaded.");
+console.log('[Youku Cast] Background script loaded.');
 chrome.extension.onRequest.addListener(onRequest);
 

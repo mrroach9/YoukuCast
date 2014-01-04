@@ -7,7 +7,7 @@
 
 // object->param[name=movie|src, value=...]
 //       ->embed[type='application/x-shockwave-flash', src=...]
-function matchYoukuType1(node) {
+matchYoukuType1 = function(node) {
     var paramUrl = node.find('param[name="movie"]').attr('value') ||
                    node.find('param[name="src"]').attr('value');
     var embedUrl = node.find('embed[type="application/x-shockwave-flash"]').attr('src');
@@ -15,12 +15,12 @@ function matchYoukuType1(node) {
         return null;
     }
     return extractYoukuVideoID(paramUrl);
-}
+};
 
 // object[type='application/x-shockwave-flash' data=...]
 //       ->param[name=movie, value=...]
 //       ->param[name=flashVars, value=...]
-function matchYoukuType2(node) {
+matchYoukuType2 = function(node) {
     if (node.attr('type') != 'application/x-shockwave-flash') {
         return null;
     }
@@ -32,9 +32,9 @@ function matchYoukuType2(node) {
         return null;
     }
     return extractYoukuVideoID(addrUrl + '?' + param);
-}
+};
 
-function extractYoukuVideoID(str) {
+extractYoukuVideoID = function(str) {
     if (!str) {
         return null;
     }
@@ -45,7 +45,7 @@ function extractYoukuVideoID(str) {
         return null;
     }
     return result[1];
-}
+};
 
 $(document).ready(function() {
     console.log('[Youku Cast] Content script loaded.');

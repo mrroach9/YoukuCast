@@ -33,5 +33,6 @@
     "background": {
         "scripts": ["js/background.js"]
     },
-    "options_page": "options.html"
+    "options_page": "options.html",
+    "permissions": ["http://*/*"]
 }

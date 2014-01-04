@@ -1,0 +1,178 @@
+/*
+ * Skin for jPlayer Plugin (jQuery JavaScript Library)
+ * http://www.jplayer.org
+ *
+ * Skin Name: Blue Monday
+ *
+ * Copyright (c) 2010-2012 Happyworm Ltd
+ * Dual licensed under the MIT and GPL licenses.
+ *  - http://www.opensource.org/licenses/mit-license.php
+ *  - http://www.gnu.org/copyleft/gpl.html
+ *
+ * Author: Silvia Benvenuti
+ * Skin Version: 4.3 (jPlayer 2.2.0)
+ * Date: 19th November 2012
+ */
+
+body {
+    margin: 0;
+}
+
+div.jp-audio {
+    font-size:1.25em; 
+    width: 325px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    line-height:1.6;
+    color: #666;
+    border:1px solid #009be3;
+    background-color:#eee;
+}
+
+div.jp-audio *:focus {
+    outline:0;
+}
+
+div.jp-interface {
+    position: relative;
+    background-color:#eee;
+    width:100%;
+}
+
+div.jp-audio div.jp-type-single div.jp-interface {
+    height:80px;
+}
+div.jp-audio div.jp-type-playlist div.jp-interface {
+    height:80px;
+}
+
+div.jp-interface ul.jp-controls {
+    list-style-type:none;
+    margin:0;
+    padding: 0;
+    overflow:hidden;
+}
+
+div.jp-audio ul.jp-controls {
+    width: 290px;
+    padding: 15px 20px 0 15px;
+}
+
+div.jp-interface ul.jp-controls li {
+    display:inline;
+    float: left;
+}
+
+div.jp-interface ul.jp-controls a {
+    display:block;
+    overflow:hidden;
+    text-indent:-9999px;
+}
+
+a.jp-play,
+a.jp-pause {
+    width:40px;
+    height:40px;
+}
+
+a.jp-play {
+    background: url("img/jplayer.blue.monday.jpg") 0 0 no-repeat;
+}
+
+a.jp-play:hover {
+    background: url("img/jplayer.blue.monday.jpg") -41px 0 no-repeat;
+}
+
+a.jp-pause {
+    background: url("img/jplayer.blue.monday.jpg") 0 -42px no-repeat;
+    display: none;
+}
+
+a.jp-pause:hover {
+    background: url("img/jplayer.blue.monday.jpg") -41px -42px no-repeat;
+}
+
+a.jp-stop {
+    width:28px;
+    height:28px;
+    margin-top:6px;
+}
+
+a.jp-stop {
+    background: url("img/jplayer.blue.monday.jpg") 0 -83px no-repeat;
+    margin-left:10px;
+}
+
+a.jp-stop:hover {
+    background: url("img/jplayer.blue.monday.jpg") -29px -83px no-repeat;
+}
+
+div.jp-progress {
+    overflow:hidden;
+    background-color: #ddd;
+}
+
+div.jp-audio div.jp-progress {
+    position: absolute;
+    top: 27px;
+    height:15px;
+}
+
+div.jp-audio div.jp-type-single div.jp-progress {
+    left: 105px;
+    width:186px;
+}
+
+div.jp-audio div.jp-type-playlist div.jp-progress {
+    left:166px;
+    width:130px;
+}
+
+div.jp-seek-bar {
+    background: url("img/jplayer.blue.monday.jpg") 0 -202px repeat-x;
+    width:0px;
+    height:100%;
+    cursor: pointer;
+}
+
+div.jp-play-bar {
+    background: url("img/jplayer.blue.monday.jpg") 0 -218px repeat-x ;
+    width:0px;
+    height:100%;
+}
+
+div.jp-seeking-bg {
+    background: url("img/jplayer.blue.monday.seeking.gif");
+}
+
+div.jp-audio div.jp-time-holder {
+    position:absolute;
+    top:50px;
+}
+
+div.jp-audio div.jp-type-single div.jp-time-holder {
+    left:110px;
+    width:186px;
+}
+
+div.jp-current-time,
+div.jp-duration {
+    width:60px;
+    font-size:.64em;
+}
+
+div.jp-current-time {
+    float: left;
+    display:inline;
+}
+
+div.jp-duration {
+    float: right;
+    display:inline;
+    text-align: right;
+}
+
+div.jp-title {
+    font-weight:bold;
+    text-align:center;
+}

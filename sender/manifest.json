@@ -34,5 +34,9 @@
         "scripts": ["js/background.js"]
     },
     "options_page": "options.html",
-    "permissions": ["http://*/*"]
+    
+    "permissions": ["tabs", "http://*/*"],
+    "externally_connectable": {
+        "matches": ["*://lab.roach-works.com/*"]
+    }
 }

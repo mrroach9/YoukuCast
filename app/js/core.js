@@ -1,5 +1,3 @@
-var appID = 'ba9523d3-a6e6-405a-a036-3bf13d76f759';
-var extensionID = 'cmmceaghnimannhfgenppicbbidphokp';
 var cast_api = null;
 var msgSource = {
     'client' : 'YoukuCast-Client',
@@ -8,6 +6,7 @@ var msgSource = {
 };
 
 initializeApi = function() {
+    sendLog('Initializing cast API...' + cast_api);
     if (!cast_api) {
         cast_api = new cast.Api();
         cast_api.addReceiverListener(appID, onReceiverList);

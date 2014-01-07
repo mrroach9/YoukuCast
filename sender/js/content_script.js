@@ -1,9 +1,15 @@
 // The content script searches the document and finds all 
 // embedded video player widgets. If any player found, 
 // their infos and an ack message will be sent to the
-// background script.
+// popup page.
 // Author: Mr.Roach
 // Date Created: 01/01/2014
+
+var msgSource = {
+    'client' : 'YoukuCast-Client',
+    'app' : 'YoukuCast-App',
+    'server': 'YoukuCast-Server'
+};
 
 // object->param[name=movie|src, value=...]
 //       ->embed[type='application/x-shockwave-flash', src=...]
@@ -47,20 +53,35 @@ extractYoukuVideoID = function(str) {
     return result[1];
 };
 
+onReceiveMessage = function(msg, sender, callback) {
+    if (!msg || !sender || msg['source'] != msgSource['client']) {
+        callback(null);
+        return;
+    }
+    if (msg['type'] == 'request-video-list') {
+        onRequestVideoList(callback);
+    }
+}
+
+onRequestVideoList = function(callback) {
+    videoList = [];
+    $('object').each(function(e) {
+        videoID = null || matchYoukuType1($(this)) || matchYoukuType2($(this));
+        if (videoID) {
+            videoList.push(videoID);
+        }
+    });
+    console.log('[Youku Cast] Video list: ');
+    console.log('[Youku Cast] \t' + videoList);
+    callback({
+        'source': msgSource['client'],
+        'type': 'video-list',
+        'video-list': videoList
+    });
+};
+
 $(document).ready(function() {
     console.log('[Youku Cast] Content script loaded.');
-    $(document).on('DOMNodeInserted', function() {
-        $('object[YCtagged!="true"]').each(function(e) {
-            console.log($(this));
-            videoID = null || matchYoukuType1($(this)) || matchYoukuType2($(this));
-            if (videoID) {
-                chrome.extension.sendRequest(
-                    {
-                        'video-id' : videoID, 
-                    }, function(response) {});
-            }
-            $(this).attr('YCtagged', 'true');
-        });
-    });
+    chrome.runtime.onMessage.addListener(onReceiveMessage);
 });
 

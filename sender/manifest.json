@@ -13,12 +13,12 @@
         "128": "img/icon_128.png"
     },
     
-    "page_action":  {
+    "browser_action":  {
         "default_icon": {
             "19": "img/icon_19.png",
             "38": "img/icon_38.png"
         },
-        "default_title": "检测到优酷视频，可使用Youku Cast",
+        "default_title": "Youku Cast",
         "default_popup": "popup.html"
     },
     "content_scripts": [

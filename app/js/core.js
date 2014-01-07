@@ -1,6 +1,6 @@
 var appID = 'ba9523d3-a6e6-405a-a036-3bf13d76f759';
 var extensionID = 'cmmceaghnimannhfgenppicbbidphokp';
-var cast_api;
+var cast_api = null;
 var msgSource = {
     'client' : 'YoukuCast-Client',
     'app' : 'YoukuCast-App',
@@ -8,7 +8,6 @@ var msgSource = {
 };
 
 initializeApi = function() {
-    console.log('Initializing API');
     if (!cast_api) {
         cast_api = new cast.Api();
         cast_api.addReceiverListener(appID, onReceiverList);
@@ -28,7 +27,8 @@ requestVideoList = function() {
         'source': msgSource['app'],
         'type': 'request-video-list'
     }, function(response) {
-        if (!response || response.source != msgSource['client']) {
+        sendLog('In response callback function:' + JSON.stringify(response));
+        if (!response || response['source'] != msgSource['client']) {
             return;
         }
         for (var id in response['video-ids']) {
@@ -47,6 +47,7 @@ sendLog = function(msg) {
 
 $(document).ready(function() {
     $('#log-info').empty();
+    sendLog('Chromecast App loaded.');
 
     if (window.cast && window.cast.isAvailable) {
         initializeApi();

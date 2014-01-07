@@ -3,19 +3,30 @@
         <link rel="stylesheet" type="text/css" href="css/popup.css">
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.tools.min.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
         <script type="text/javascript" src="js/popup.js"></script>
     </head>
     <body>
-        <div id="log-info"></div>
-        <div class="video-list">
+        <div class="video-tab">
             <div class="tools">
                 <div class="page-scroll">
+                    <a href="javascript:void(0)" class="prev scroll-button">
+                        <span class="left-button"></span>
+                    </a>
+                    <span class="page-text">1/6</span>
+                    <a href="javascript:void(0)" class="next scroll-button">
+                        <span class="left-button"></span>
+                    </a>
                 </div>
-                <div class="button-area">
-                    <div class="refresh-button">
-                    </div>
-                    <div class="switch-device">
-                    </div>
+                <div class="refresh-button">
+                    <a href="javascript:void(0)">
+                        <span class="refresh-button-img">
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="video-list scrollable">
+                <div class="items">
                 </div>
             </div>
         </div>

@@ -16,17 +16,19 @@
 
 body {
     margin: 0;
+    border: 1px solid #AAA;
+    border-radius: 2px;
 }
 
 div.jp-audio {
-    font-size:1.25em; 
+    font-size: 1.25em; 
     width: 325px;
     font-family: Arial, sans-serif;
     font-weight: 400;
-    line-height:1.6;
+    line-height: 1.6;
     color: #555;
-    border:1px solid #009be3;
-    background-color:#eee;
+    border-top: 1.5px solid #50A0E0;
+    background-color: #eee;
 }
 
 div.jp-audio *:focus {
@@ -35,7 +37,7 @@ div.jp-audio *:focus {
 
 div.jp-interface {
     position: relative;
-    background-color:#eee;
+    background-color:#EAEAEE;
     width:100%;
 }
 
@@ -181,7 +183,7 @@ div.now-playing {
     display: block;
     width: 100%;
     height: 22px;
-    background-color: #DDE;
+    background-color: #E0E0EE
 }
 
 .now-playing-text {
@@ -199,7 +201,7 @@ div.now-playing {
     float: right;
     padding-right: 6px;
     padding-top: 2px;
-    font: 200 12.5px arial, san-serif;
+    font: 200 12.5px arial, sans-serif;
     color: #888;
 }
 
@@ -207,4 +209,164 @@ div.now-playing {
     margin-left: 3px;
     color: #888;
     text-decoration: underline;
+}
+
+.scrollable {
+  position: relative;
+  overflow: hidden;
+  width: 325px;
+  height: 120px;
+}
+
+.scrollable .items {
+  width: 2000em;
+  position: absolute;
+}
+
+.items div {
+    float:left;
+}
+
+a.scroll-button {
+    display: block;
+    height: 20px;
+    width: 20px;
+    background: url('../img/buttons.png') no-repeat;
+    background-size: 100px 100px;
+}
+
+a.scroll-button.prev {
+    background-position: 0 0;
+    opacity: 0.65;
+}
+a.scroll-button.prev:hover {
+    background-position: 0px 0;
+    opacity: 0.9;
+}
+a.scroll-button.next {
+    background-position: -27px 0;
+    opacity: 0.65;
+}
+a.scroll-button.next:hover {
+    background-position: -27px 0;
+    opacity: 0.9;
+}
+
+div.page-scroll > *{
+    float: left;
+}
+
+.page-text {
+    padding: 2px 6px 0 6px;
+    color: #555;
+    font: 200 15px arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+div.video-list {
+    display: block;
+    background-color: #f3f3f3;
+}
+
+div.items {
+    display: block;
+    height: 100px;
+    left: 0px;
+}
+
+div.video {
+    display: block;
+    padding: 7px 5px 8px 7px;
+    width: 313px;
+}
+
+.video > a {
+    color: #888;
+    text-decoration: none;
+}
+
+div.thumb {
+    display: block;
+    margin: 5px;
+    border: 1px solid #AAA;
+}
+
+.thumb-img {
+    display: block;
+    width: 90px;
+    height: 90px;
+    background-size: 90px 90px;
+}
+
+div.info {
+    display: block;
+    margin: 3px 0 0 5px;
+    width: 205px;
+}
+
+div.info span,
+div.info div {
+    display: block;
+}
+
+span.title {
+    font: bold 14px Arial, sans-serif;
+    color: #666;
+    max-width: 200px;
+    overflow-x:hidden;
+    white-space: nowrap;
+}
+
+span.description{
+    font: 200 12px Arial, sans-serif;
+    float: left;
+    margin-top: 5px;
+    max-height: 45px;
+    overflow-y: hidden;
+}
+
+span.duration {
+    float: right;
+    font: 200 12px Arial, sans-serif;
+}
+
+span.source {
+    float: left;
+    font: 200 12px Arial, sans-serif;
+}
+
+div.video-top {
+    height: 75px;
+    width: 100%;
+}
+
+div.video-bottom {
+    margin-top: 3px;
+    width: 100%;
+}
+
+div.tools {
+    width: 325px;
+    height: 30px;
+    background-color: #EEE
+}
+
+div.page-scroll {
+    display: block;
+    float: left;
+    padding: 7px 5px 1px 18px;
+}
+
+div.refresh-button {
+    display: block;
+    float: right;
+    margin: 3px 5px 2px 10px;
+}
+
+span.refresh-button-img {
+    display: block;
+    width: 23px;
+    height: 23px;
+    background: url('../img/buttons.png') 0 -21px no-repeat;
+    background-size: 100px 100px;
 }

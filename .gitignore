@@ -39,3 +39,5 @@ Thumbs.db
 # Customized         #
 ######################
 config.js
+*.xcf
+

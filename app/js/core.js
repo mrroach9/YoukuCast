@@ -9,7 +9,7 @@ initializeApi = function() {
     console.log('[Youku Cast] Initializing cast API...');
     if (!cast_api) {
         cast_api = new cast.Api();
-        cast_api.addReceiverListener(appID, onReceiverList);
+        cast_api.addReceiverListener(ID_INFO['CAST_APP_ID'], onReceiverList);
     }
 };
 
@@ -31,5 +31,4 @@ $(document).ready(function() {
             }
         });
     }
-    requestVideoList();
 });

@@ -34,19 +34,21 @@ getVideoList = function(callback) {
                 return;
             }
             for (var id in tabList) {
-                var tab = tabList[id];
-                chrome.tabs.sendMessage(tab.id, {
-                    'source': msgSource['client'],
-                    'type': 'request-video-list'
-                }, function(response) {
-                    if (!response || response['source'] != msgSource['client']
-                        || response['type'] != 'video-list') {
-                        callback([]);
-                        return;
-                    } else {
-                        callback(response['video-list']);
-                    }
-                });
+                (function() {
+                    var tab = tabList[id];
+                    chrome.tabs.sendMessage(tab.id, {
+                        'source': msgSource['client'],
+                        'type': 'request-video-list'
+                    }, function(response) {
+                        if (!response || response['source'] != msgSource['client']
+                            || response['type'] != 'video-list') {
+                            callback([], null);
+                            return;
+                        } else {
+                            callback(response['video-list'], tab);
+                        }
+                    });
+                }());
             }
         }
     );
@@ -80,7 +82,7 @@ refreshVideoTab = function(node, videoInfo) {
     var duration = parseInt(videoInfo['duration']) || 0;
     duration = convertTimeToString(duration);
 
-    var source = videoInfo['source-tab'] || '未知网页';
+    var source = videoInfo['source-tab'].title || '未知网页';
     if (source.length > 8) {
         source = source.substring(0, 8) + '...';
     }
@@ -125,8 +127,31 @@ genVideoTab = function(videoInfo) {
 
 onUpdateVideoTab = function() {
     var api = $('.scrollable').data('scrollable');
-    $('.page-text').text((api.getIndex() + 1) + '/' + api.getSize());
+    var index = (api.getSize() == 0) ? 0 : (api.getIndex() + 1);
+    $('.page-text').text(index + '/' + api.getSize());
 }
+
+queryVideoInfo = function(vid, tab, callback) {
+    if (!vid || !tab) {
+        callback(null);
+        return;
+    }
+    var url = 'https://openapi.youku.com/v2/videos/show_basic.json';
+    $.get(url, {
+        'client_id': ID_INFO['YOUKU_APP_ID'],
+        'video_id': vid
+    }, function(data) {
+        if (!data) {
+            callback(null);
+            return;
+        }
+        data['source-tab'] = tab;
+        console.log(tab);
+        callback(data);
+    }).fail(function() {
+        callback(null);
+    });
+};
 
 $(document).ready(function() {
     $('.scrollable > .items').empty();
@@ -134,10 +159,12 @@ $(document).ready(function() {
         onSeek: onUpdateVideoTab,
         onAddItem: onUpdateVideoTab
     });
-    getVideoList(function(videoList) {
+    getVideoList(function(videoList, tab) {
         console.log('[Youku Cast] ' + videoList);
         for (var vid in videoList) {
-            $('.scrollable').data('scrollable').addItem(genVideoTab({}));
+            queryVideoInfo(videoList[vid], tab, function(videoInfo) {
+                $('.scrollable').data('scrollable').addItem(genVideoTab(videoInfo));
+            })
         }
     });
 });

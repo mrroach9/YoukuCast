@@ -34,7 +34,75 @@
         <h1>
 <a name="youku-cast" class="anchor" href="#youku-cast"><span class="octicon octicon-link"></span></a>Youku Cast</h1>
 
-<p>A Chromecast sender-and-receiver app for Youku (and probably other Chinese video sites, e.g. Tudou, 56, bilibili etc.).</p>
+<p>Youku Cast is a Chrome extension based on Google Cast, launching your online videos from popular video websites (currently Youku only) to your Chromecast fast and easily.</p>
+
+<p>Due to the lack of an official Chromecast SDK on Chrome platform and the development progress issue, Youku Cast is currently for alpha testing only.</p>
+
+<h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<h4>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h4>
+
+<ul>
+<li>An initialized Chromecast device connected to Internet.</li>
+<li>Wireless network that connects both your laptop (or desktop) and your Chromecast.</li>
+<li>Chrome 30+</li>
+<li>Google Cast extension installed on your Chrome.</li>
+</ul><h4>
+<a name="whitelisting" class="anchor" href="#whitelisting"><span class="octicon octicon-link"></span></a>Whitelisting</h4>
+
+<p>To enable your chromecast to interact with Youku Cast, you need to whitelist both your Chromecast and Youku Cast.</p>
+
+<ul>
+<li>
+<p>To enable Youku Cast:</p>
+
+<ul>
+<li>Open Chrome extension page (chrome://extensions), and check the Developer mode checkbox to enable developer mode.</li>
+<li>Open Google Cast option page, click 4-7 times on the blue Cast icon in the page's upper left corner. The Developer Settings will appear.</li>
+<li>In the Cast SDK additional domains field, enter:
+<code>
+http://lab.roach-works.com
+</code>
+</li>
+</ul>
+</li>
+<li>
+<p>To enable your Chromecast:</p>
+
+<ul>
+<li>Find the device serial number of your Chromecast on the markings on the back side. The serial number is the topmost number that begins with a 3, 4 or 5. </li>
+<li>Send an email to me (you know who :-)) with your name and serial number. I will add you to the whitelist of the app. As it requires approval from Google, it may take up to 1 week to confirm.</li>
+</ul>
+</li>
+</ul><p>Check more details at:</p>
+
+<pre><code>https://developers.google.com/cast/whitelisting#whitelist-chrome
+</code></pre>
+
+<p>Then you can install Youku Cast from Chrome Store at</p>
+
+<pre><code>[TODO] Add web address here for Youku Cast.
+</code></pre>
+
+<h3>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h3>
+
+<p>Due to the limitation of Google Cast API, there needs to be an app page running in a Chrome tab during the usage to Youku Cast. Please do not close it as it will cause disconnection of Youku Cast and your Chromecast (and Youku Cast will try to re-open it).</p>
+
+<p>At any time, click on Youku Cast icon, all Youku video players in all opened pages will be detected and listed in the popup page, select the one that you want to cast and click it to start casting.</p>
+
+<p>The bottom part of the popup page shows the current status and controller of your chromecast. Youku API currently allows playing/pausing/stopping and seeking to a specified time. No volume adjusting is permitted at this time. To switch between multiple chromecasts, click on the link above the controller on the right. </p>
+
+<h3>
+<a name="troubleshooting" class="anchor" href="#troubleshooting"><span class="octicon octicon-link"></span></a>Troubleshooting</h3>
+
+<ul>
+<li><p>If the status bar above the controller shows "API not initialized", click on "start" link on its right to open the background page. If it does not resolve the issue, check whether you and your Chromecast are in the same LAN and have full access to Internet.</p></li>
+<li><p>If the status bar shows "No device found" but you do have an Chromecast device, please check whether it is whitelisted and connected to the same WAN as your laptop. It usually takes a few seconds for the device list to refresh. </p></li>
+<li><p>If any of your Youku video player embedded in some page does not show up in the popup page, try to refresh that page as the content script might have crashed. If that does not resolve the issue, please contact me.</p></li>
+</ul>
       </section>
     </div>
 

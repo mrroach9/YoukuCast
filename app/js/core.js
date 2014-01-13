@@ -7,7 +7,7 @@ var msgSource = {
 };
 
 initializeApi = function() {
-    console.log('[Youku Cast] Initializing cast API...');
+    console.log('[Youku Cast][App] Initializing cast API...');
     if (!cast_api) {
         cast_api = new cast.Api();
         cast_api.addReceiverListener(ID_INFO['CAST_APP_ID'], onReceiverList);
@@ -15,7 +15,7 @@ initializeApi = function() {
 };
 
 onReceiverList = function(list) {
-    console.log('[Youku Cast] Receivers list: ' + JSON.stringify(list));
+    console.log('[Youku Cast][App] Receivers list: ' + JSON.stringify(list));
     receiver_list = list;
 };
 
@@ -30,14 +30,17 @@ launch = function(receiver, videoInfo) {
     request.description = new window.cast.LaunchDescription();
     request.description.text = videoInfo['title'];
     request.description.url = videoInfo['link'];
-    cast_api.launch(request, onLaunch);
+    cast_api.launch(request, function(activity){});
 };
 
-dummyLaunch = function() {
+dummyLaunch = function(vid) {
+    if (!receiver_list || !receiver_list[0]) {
+        return;
+    }
     launch(receiver_list[0], {
-        'vid': 'XNjU2MjIzOTQw',
-        'title': '神探夏洛克 第三季 02',
-        'link': 'http://v.youku.com/v_show/id_XNjU2MjIzOTQw.html'
+        'vid': vid,
+        'title': '测试视频',
+        'link': 'http://v.youku.com/v_show/id_' + vid + '.html'
     });
 };
 

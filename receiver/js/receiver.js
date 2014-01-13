@@ -1,14 +1,11 @@
 
 $('document').ready(function() {
-    player = new YKU.Player('youkuplayer',{
-        client_id: ID_INFO['YOUKU_APP_ID'],
-        vid: $.url().param('vid'),
-        autoplay: true,
-        show_related: false,
-        events:{
-            onPlayerReady: function(){},
-            onPlayStart: function(){},
-            onPlayEnd: function(){}
-        }
+    var vid = $.url().param('vid');
+    $('#video-player').attr('controls', 'controls')
+                      .attr('autoplay', 'autoplay')
+                      .attr('height', 720)
+                      .attr('width', 1280);
+    getYoukuMp4Url(vid, function(url) {
+        $('#video-player').attr('src', url);
     });
 });

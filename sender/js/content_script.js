@@ -71,8 +71,8 @@ onRequestVideoList = function(callback) {
             videoList.push(videoID);
         }
     });
-    console.log('[Youku Cast] Video list: ');
-    console.log('[Youku Cast] \t' + videoList);
+    console.log('[Youku Cast][Client] Video list: ');
+    console.log('[Youku Cast][Client] \t' + videoList);
     callback({
         'source': msgSource['client'],
         'type': 'video-list',
@@ -81,7 +81,7 @@ onRequestVideoList = function(callback) {
 };
 
 $(document).ready(function() {
-    console.log('[Youku Cast] Content script loaded.');
+    console.log('[Youku Cast][Client] Content script loaded.');
     chrome.runtime.onMessage.addListener(onReceiveMessage);
 });
 

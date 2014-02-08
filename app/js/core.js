@@ -24,9 +24,7 @@ launch = function(receiver, videoInfo) {
         return;
     }
     var request = new window.cast.LaunchRequest(ID_INFO['CAST_APP_ID'], receiver);
-    request.parameters = {
-        'vid': videoInfo['vid']
-    };
+    request.parameters = 'vid=' + videoInfo['vid'];
     request.description = new window.cast.LaunchDescription();
     request.description.text = videoInfo['title'];
     request.description.url = videoInfo['link'];

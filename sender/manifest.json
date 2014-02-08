@@ -31,12 +31,8 @@
         }
     ],
     "background": {
-        "scripts": ["js/background.js"]
+        "scripts": ["js/cast_sender.js", "js/cast_handler.js", "js/background.js", "js/config.js"]
     },
     "options_page": "options.html",
-    
-    "permissions": ["tabs", "http://*/*"],
-    "externally_connectable": {
-        "matches": ["*://lab.roach-works.com/*"]
-    }
+    "permissions": ["tabs", "http://*/*"]
 }

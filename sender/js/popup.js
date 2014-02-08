@@ -4,6 +4,8 @@ var msgSource = {
     'server': 'YoukuCast-Server'
 };
 
+var allVideoList = {};
+
 recvMessage = function(response, sender, callback) {
     console.log(response);
     if (!response || response['source'] != msgSource['app']) {
@@ -146,25 +148,35 @@ queryVideoInfo = function(vid, tab, callback) {
             return;
         }
         data['source-tab'] = tab;
-        console.log(tab);
-        callback(data);
+        getYoukuMp4Url(vid, function(url) {
+            data['html5-link'] = url;
+            callback(data);
+        });
     }).fail(function() {
         callback(null);
     });
 };
 
-$(document).ready(function() {
-    $('.scrollable > .items').empty();
-    $('.scrollable').scrollable({
-        onSeek: onUpdateVideoTab,
-        onAddItem: onUpdateVideoTab
-    });
+refresh = function() {
     getVideoList(function(videoList, tab) {
-        console.log('[Youku Cast] ' + videoList);
+        allVideoList = {};
+        $('.scrollable > .items').empty();
         for (var vid in videoList) {
             queryVideoInfo(videoList[vid], tab, function(videoInfo) {
+                console.log('[Youku Cast] Video collected: ');
+                console.log(videoInfo);
+                allVideoList[vid] = videoInfo;
                 $('.scrollable').data('scrollable').addItem(genVideoTab(videoInfo));
             })
         }
     });
+}
+
+$(document).ready(function() {
+    $('.scrollable').scrollable({
+        onSeek: onUpdateVideoTab,
+        onAddItem: onUpdateVideoTab
+    });
+    $('#refresh-button').click(refresh);
+    refresh();
 });

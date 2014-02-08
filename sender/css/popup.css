@@ -278,6 +278,11 @@ div.video {
     display: block;
     padding: 7px 5px 8px 7px;
     width: 313px;
+    height: 105px;
+}
+
+div.video:hover {
+    background-color: #9EB;
 }
 
 .video > a {

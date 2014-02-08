@@ -17,10 +17,18 @@ matchYoukuType1 = function(node) {
     var paramUrl = node.find('param[name="movie"]').attr('value') ||
                    node.find('param[name="src"]').attr('value');
     var embedUrl = node.find('embed[type="application/x-shockwave-flash"]').attr('src');
-    if (!paramUrl || !embedUrl || paramUrl != embedUrl) {
+    if (!paramUrl && !embedUrl) {
         return null;
+    } else if (paramUrl && embedUrl) {
+        if (paramUrl == embedUrl) {
+            return extractYoukuVideoID(paramUrl);
+        } else {
+            return null;
+        }
+    } else {
+        return extractYoukuVideoID(paramUrl || embedUrl);
     }
-    return extractYoukuVideoID(paramUrl);
+    return null;
 };
 
 // object[type='application/x-shockwave-flash' data=...]

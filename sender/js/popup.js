@@ -5,6 +5,7 @@ var msgSource = {
 };
 
 var allVideoList = {};
+var bgPage = chrome.extension.getBackgroundPage();
 
 recvMessage = function(response, sender, callback) {
     console.log(response);
@@ -69,7 +70,23 @@ convertTimeToString = function(sec) {
     return hstr + mstr + sstr;
 };
 
-refreshVideoTab = function(node, videoInfo) {
+updatePlayerStatus = function() {
+    if (!bgPage.session) {
+        $('.device').empty().append('未检测到设备');
+    }
+    if (!bgPage.session || !bgPage.currentMedia) {
+        $('.now-playing-text').empty().append('正在播放：无视频');
+        $('.jp-play').show();
+        $('.jp-pause').hide();
+        $('.jp-current-time').empty().append('00:00');
+        $('.jp-duration').empty().append('00:00');
+        $('.jp-play-bar').css('width', '0%');
+    } else {
+        // TODO: fill in proper status
+    }
+};
+
+fillVideoTab = function(node, videoInfo) {
     if (!videoInfo || !node) {
         return null;
     }
@@ -101,6 +118,7 @@ refreshVideoTab = function(node, videoInfo) {
     node.find('.description').append(description);
     node.find('.duration').append(duration);
     node.find('.source').append(source);
+    node.find('.video-anchor').attr('video-id', videoInfo['id']);
 
     return node;
 };
@@ -122,9 +140,10 @@ genVideoTab = function(videoInfo) {
     infoNode.append(topDiv).append(botDiv);
 
     var container = $('<div>').addClass('video').append(
-                        $('<a>').attr('href', 'javascript:void(0)')
+                        $('<a>').addClass('video-anchor')
+                                .attr('href', '#')
                                 .append(thumbNode).append(infoNode));
-    return refreshVideoTab(container, videoInfo);
+    return fillVideoTab(container, videoInfo);
 };
 
 onUpdateVideoTab = function() {
@@ -165,18 +184,40 @@ refresh = function() {
             queryVideoInfo(videoList[vid], tab, function(videoInfo) {
                 console.log('[Youku Cast] Video collected: ');
                 console.log(videoInfo);
-                allVideoList[vid] = videoInfo;
+                allVideoList[videoInfo['id']] = videoInfo;
                 $('.scrollable').data('scrollable').addItem(genVideoTab(videoInfo));
             })
         }
     });
 }
 
+init = function() {
+    refresh();
+    updatePlayerStatus();
+};
+
 $(document).ready(function() {
     $('.scrollable').scrollable({
         onSeek: onUpdateVideoTab,
         onAddItem: onUpdateVideoTab
     });
+    $(document).on('click', '.video-anchor', function(){
+        var videoInfo = allVideoList[$(this).attr('video-id')];
+        console.log('[Youku Cast] Video clicked for casting: ');
+        console.log(videoInfo);
+        bgPage.loadMedia(videoInfo);
+    });
     $('#refresh-button').click(refresh);
-    refresh();
+
+    setTimeout(updatePlayerStatus, 1000);
+    init();
 });
+
+/*
+ * Chrome CSP does not allow executing inline scripts, even
+ * javascript:void(0) that are commonly used as dummy commands
+ * for customized anchors. Hereby this is used for them.
+ */
+void_func = function() {
+    // Do nothing
+};

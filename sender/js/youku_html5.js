@@ -109,6 +109,7 @@ getYoukuMp4Url = function(vid, callback) {
                 }
                 if(typeof(mp4DataUrl) === 'undefined')
                     var mp4DataUrl = videoInfo._videoSegsDic['3gphd'][0].src;
+                // TODO: add support for segmented videos.
 
                 $.ajax({
                     url : mp4DataUrl + '&callback=_',

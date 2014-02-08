@@ -6,10 +6,15 @@
 // Date Created: 01/01/2014
 
 var msgSource = {
-    'client' : 'YoukuCast-Client',
-    'app' : 'YoukuCast-App',
-    'server': 'YoukuCast-Server'
+    'cs' : 'YoukuCast-Content-Script',
+    'bg' : 'YoukuCast-Background',
+    'popup' : 'YoukuCast-Popup',
+    'sender' : 'YoukuCast-Sender',
+    'receiver': 'YoukuCast-Receiver'
 };
+
+// TODO: 2 more types of embedding needs to be processed: 
+// they have src and video id's hidden in flashvars.
 
 // object->param[name=movie|src, value=...]
 //       ->embed[type='application/x-shockwave-flash', src=...]
@@ -62,7 +67,7 @@ extractYoukuVideoID = function(str) {
 };
 
 onReceiveMessage = function(msg, sender, callback) {
-    if (!msg || !sender || msg['source'] != msgSource['client']) {
+    if (!msg || !sender || msg['source'] != msgSource['popup']) {
         callback(null);
         return;
     }
@@ -79,17 +84,17 @@ onRequestVideoList = function(callback) {
             videoList.push(videoID);
         }
     });
-    console.log('[Youku Cast][Client] Video list: ');
-    console.log('[Youku Cast][Client] \t' + videoList);
+    console.log('[Youku Cast] Video list: ');
+    console.log('[Youku Cast] \t' + videoList);
     callback({
-        'source': msgSource['client'],
+        'source': msgSource['cs'],
         'type': 'video-list',
         'video-list': videoList
     });
 };
 
 $(document).ready(function() {
-    console.log('[Youku Cast][Client] Content script loaded.');
+    console.log('[Youku Cast] Content script loaded.');
     chrome.runtime.onMessage.addListener(onReceiveMessage);
 });
 

@@ -1,7 +1,9 @@
 var msgSource = {
-    'client' : 'YoukuCast-Client',
-    'app' : 'YoukuCast-App',
-    'server': 'YoukuCast-Server'
+    'cs' : 'YoukuCast-Content-Script',
+    'bg' : 'YoukuCast-Background',
+    'popup' : 'YoukuCast-Popup',
+    'sender' : 'YoukuCast-Sender',
+    'receiver': 'YoukuCast-Receiver'
 };
 
 var allVideoList = {};
@@ -9,15 +11,15 @@ var bgPage = chrome.extension.getBackgroundPage();
 
 recvMessage = function(response, sender, callback) {
     console.log(response);
-    if (!response || response['source'] != msgSource['app']) {
+    if (!response) {
         return;
     }
     if (response['type'] == 'log') {
-        console.log('[Youku Cast][App] ' + response['msg']);
+        console.log('[Youku Cast] ' + response['msg']);
     } else if (response['type'] == 'request-video-list') {
         getVideoList(function(list) {
             msg = {
-                'source': msgSource['client'],
+                'source': msgSource['popup'],
                 'type': 'video-list',
                 'video-ids': list
             };
@@ -40,10 +42,10 @@ getVideoList = function(callback) {
                 (function() {
                     var tab = tabList[id];
                     chrome.tabs.sendMessage(tab.id, {
-                        'source': msgSource['client'],
+                        'source': msgSource['popup'],
                         'type': 'request-video-list'
                     }, function(response) {
-                        if (!response || response['source'] != msgSource['client']
+                        if (!response || response['source'] != msgSource['cs']
                             || response['type'] != 'video-list') {
                             callback([], null);
                             return;

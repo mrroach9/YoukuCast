@@ -21,10 +21,7 @@ To enable your Chromecast to interact with Youku Cast, you need to whitelist bot
 * To enable Youku Cast:
   * Open Chrome extension page (chrome://extensions), and check the Developer mode checkbox to enable developer mode.
   * Open Google Cast option page, click 4-7 times on the blue Cast icon in the page's upper left corner. The Developer Settings will appear.
-  * In the Cast SDK additional domains field, enter:
-```
-  [http://lab.roach-works.com]
-```
+  * In the Cast SDK additional domains field, enter: **<http://lab.roach-works.com>**
 
 * To enable your Chromecast:
   * Find the device serial number of your Chromecast on the markings on the back side. The serial number is the topmost number that begins with a 3, 4 or 5. 
@@ -32,14 +29,11 @@ To enable your Chromecast to interact with Youku Cast, you need to whitelist bot
   * Run your Chromecast native setting app (for Win or for Mac). Under **Privacy**, check the box to **Send this Chromecast's serial number when checking for updates.** Then reboot your Chromecast.
 
 Check more details at:
-```
-[https://developers.google.com/cast/whitelisting#whitelist-chrome]
-```
 
-Then you can install Youku Cast from Chrome Store at
-```
-[TODO] Add web address here for Youku Cast.
-```
+  **<https://developers.google.com/cast/whitelisting#whitelist-chrome>**
+
+Then you can install Youku Cast from Chrome Store at **[here]()**.
+
 
 ### How to use
 
